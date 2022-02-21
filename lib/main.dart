@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_whatsapp/routes/routes.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,13 +9,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
+      title: 'WhatsApp Design',
+      initialRoute: RouteApp.initialRoute,
+      routes: RouteApp.routes,
+      theme: Theme.of(context).copyWith(
+        appBarTheme: AppBarTheme.of(context).copyWith(
+          color: const Color.fromRGBO(18, 140, 126, 1),
         ),
-        body: const Center(
-          child: Text('Hello World'),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Color.fromRGBO(37, 211, 102, 1),
         ),
       ),
     );
