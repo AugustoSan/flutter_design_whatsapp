@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_whatsapp/screens/estado_screen.dart';
 import 'package:flutter_design_whatsapp/screens/screens.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
           children: [
             Icon(Icons.camera_alt),
             ChatScreen(),
-            Icon(Icons.person),
+            EstadoScreen(),
             Icon(Icons.call),
           ],
         ),

@@ -1,52 +1,58 @@
 import 'package:flutter/material.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        _ChatWidget(
-          notification: 2,
-        ),
-        _ChatWidget(
-          notification: 1,
-        ),
-        _ChatWidget(),
-      ],
-    );
-  }
-}
-
 // ignore: must_be_immutable
-class _ChatWidget extends StatelessWidget {
-  int? notification;
-  _ChatWidget({Key? key, this.notification}) : super(key: key);
+class ItemWiget extends StatelessWidget {
+  Widget? image;
+  Widget? title;
+  Widget? subtitle;
+  ItemWiget({
+    Key? key,
+    this.image,
+    this.title,
+    this.subtitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: ListTile(
-        onTap: () {},
-        style: ListTileStyle.list,
-        leading: const _ChatImage(),
-        title: const _ChatTitle(),
-        subtitle: notification != null
-            ? _ChatBody(
-                notification: notification,
-              )
-            : _ChatBody(),
+      child: Row(
+        children: [
+          _Image(
+            child: Container(),
+          ),
+          Expanded(
+            child: ListTile(
+              title: const _Title(),
+              subtitle: _Subtitle(),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _ChatTitle extends StatelessWidget {
-  const _ChatTitle({
-    Key? key,
-  }) : super(key: key);
+class _Image extends StatelessWidget {
+  final Widget child;
+  const _Image({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(50),
+      child: Container(
+        height: 60,
+        width: 60,
+        color: Colors.red,
+        child: child,
+      ),
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  const _Title({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,33 +75,10 @@ class _ChatTitle extends StatelessWidget {
   }
 }
 
-class _ChatImage extends StatelessWidget {
-  const _ChatImage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 30,
-      backgroundColor: Colors.grey[200],
-      child: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.person,
-            size: 35,
-          )),
-    );
-  }
-}
-
 // ignore: must_be_immutable
-class _ChatBody extends StatelessWidget {
+class _Subtitle extends StatelessWidget {
   int? notification;
-  _ChatBody({
-    Key? key,
-    this.notification,
-  }) : super(key: key);
+  _Subtitle({Key? key, this.notification}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
