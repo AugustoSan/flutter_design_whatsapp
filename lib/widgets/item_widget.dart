@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ItemWiget extends StatelessWidget {
   Widget? image;
-  Widget? title;
-  Widget? subtitle;
+  String title = 'Sin titulo';
+  String subtitle = '';
+  int? notification;
+  DateTime? fecha = DateTime.now();
+  Function onPress;
+
   ItemWiget({
     Key? key,
     this.image,
-    this.title,
-    this.subtitle,
+    required this.title,
+    required this.subtitle,
+    this.notification,
+    this.fecha,
+    required this.onPress,
   }) : super(key: key);
 
   @override
@@ -19,12 +26,34 @@ class ItemWiget extends StatelessWidget {
       child: Row(
         children: [
           _Image(
-            child: Container(),
+            child: image == null
+                ? const Image(
+                    image: AssetImage('assets/no-image.jpg'),
+                    fit: BoxFit.cover,
+                  )
+                : _Image(child: image!),
           ),
           Expanded(
             child: ListTile(
-              title: const _Title(),
-              subtitle: _Subtitle(),
+              title: fecha == null
+                  ? _Title(
+                      title: title,
+                    )
+                  : _Title(
+                      title: title,
+                      dateTitle: fecha,
+                    ),
+              subtitle: notification == null
+                  ? _Subtitle(
+                      subtitle: subtitle,
+                    )
+                  : _Subtitle(
+                      subtitle: subtitle,
+                      notification: notification,
+                    ),
+              onTap: () {
+                onPress();
+              },
             ),
           ),
         ],
@@ -51,24 +80,27 @@ class _Image extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class _Title extends StatelessWidget {
-  const _Title({Key? key}) : super(key: key);
+  String? title = 'Sin titulo';
+  DateTime? dateTitle;
+  _Title({Key? key, this.title, this.dateTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
+      children: [
         Expanded(
           child: Text(
-            'Javier Tapia',
-            style: TextStyle(
+            title == null ? 'Sin titulo' : title!,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
         Text(
-          '12:00 pm',
-          style: TextStyle(fontSize: 12, color: Colors.grey),
+          dateTitle == null ? DateTime.now().toString() : dateTitle.toString(),
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
         )
       ],
     );
@@ -77,16 +109,18 @@ class _Title extends StatelessWidget {
 
 // ignore: must_be_immutable
 class _Subtitle extends StatelessWidget {
+  String subtitle;
   int? notification;
-  _Subtitle({Key? key, this.notification}) : super(key: key);
+  _Subtitle({Key? key, required this.subtitle, this.notification})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Expanded(
+        Expanded(
           child: Text(
-            'Este es un mensaje de prueba con mucho texto para saber como se muestra',
+            subtitle,
             overflow: TextOverflow.ellipsis,
           ),
         ),

@@ -6,5 +6,6 @@ class RouteApp {
   static String initialRoute = 'home_page';
   static Map<String, Widget Function(BuildContext)> routes = {
     'home_page': (_) => const HomePage(),
+    'chat_page': (_) => const ChatPage(),
   };
 }
