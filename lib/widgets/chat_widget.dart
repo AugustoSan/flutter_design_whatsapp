@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_whatsapp/models/models.dart';
+import 'package:flutter_design_whatsapp/utils/utils.dart';
+import 'package:flutter_design_whatsapp/widgets/widgets.dart';
 
 class ChatWidget extends StatelessWidget {
-  const ChatWidget({Key? key}) : super(key: key);
+  final Contact contac;
+  const ChatWidget({Key? key, required this.contac}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: ListTile(
-        style: ListTileStyle.list,
-        leading: CircleAvatar(
-          radius: 35,
-          backgroundColor: Colors.grey[200],
-          child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.person,
-                size: 35,
-              )),
-        ),
-        title: const Text('Javier Tapia'),
-      ),
+    final messages = contac.messages;
+    return ItemWiget(
+      title: contac.name,
+      previewTitle: DateUtil.dateToString(messages[messages.length - 1].date),
+      subtitle: messages.isNotEmpty ? messages[0].message : '',
+      onPress: () =>
+          Navigator.pushNamed(context, 'chat_page', arguments: contac),
     );
   }
 }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class ItemWiget extends StatelessWidget {
   Widget? image;
-  String title = 'Sin titulo';
+  String title;
+  String? previewTitle;
   String subtitle = '';
   int? notification;
   DateTime? fecha = DateTime.now();
@@ -13,6 +14,7 @@ class ItemWiget extends StatelessWidget {
     Key? key,
     this.image,
     required this.title,
+    this.previewTitle,
     required this.subtitle,
     this.notification,
     this.fecha,
@@ -35,13 +37,13 @@ class ItemWiget extends StatelessWidget {
           ),
           Expanded(
             child: ListTile(
-              title: fecha == null
+              title: previewTitle == null
                   ? _Title(
                       title: title,
                     )
                   : _Title(
                       title: title,
-                      dateTitle: fecha,
+                      previewTitle: previewTitle,
                     ),
               subtitle: notification == null
                   ? _Subtitle(
@@ -83,8 +85,8 @@ class _Image extends StatelessWidget {
 // ignore: must_be_immutable
 class _Title extends StatelessWidget {
   String? title = 'Sin titulo';
-  DateTime? dateTitle;
-  _Title({Key? key, this.title, this.dateTitle}) : super(key: key);
+  String? previewTitle;
+  _Title({Key? key, this.title, this.previewTitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +101,7 @@ class _Title extends StatelessWidget {
           ),
         ),
         Text(
-          dateTitle == null ? DateTime.now().toString() : dateTitle.toString(),
+          previewTitle == null ? '' : previewTitle!,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         )
       ],

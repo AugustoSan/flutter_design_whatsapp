@@ -9,7 +9,7 @@ class Message {
 
   int idMessage;
   String message;
-  String date;
+  DateTime date;
 
   factory Message.fromJson(String str) => Message.fromMap(json.decode(str));
 
@@ -18,7 +18,7 @@ class Message {
   factory Message.fromMap(Map<String, dynamic> json) => Message(
         idMessage: json["idMessage"],
         message: json["message"],
-        date: json["date"],
+        date: DateTime.parse(json["date"]),
       );
 
   Map<String, dynamic> toMap() => {

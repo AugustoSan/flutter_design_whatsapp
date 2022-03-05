@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_whatsapp/screens/camera_screen.dart';
 import 'package:flutter_design_whatsapp/screens/estado_screen.dart';
 import 'package:flutter_design_whatsapp/screens/screens.dart';
 
@@ -40,7 +41,7 @@ class HomePage extends StatelessWidget {
         ),
         body: const TabBarView(
           children: [
-            Icon(Icons.camera_alt),
+            CameraScreen(),
             ChatScreen(),
             EstadoScreen(),
             Icon(Icons.call),
