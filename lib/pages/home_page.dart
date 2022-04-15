@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design_whatsapp/screens/camera_screen.dart';
-import 'package:flutter_design_whatsapp/screens/estado_screen.dart';
+
 import 'package:flutter_design_whatsapp/screens/screens.dart';
+import 'package:permission_handler/permission_handler.dart';
+// Import package
+import 'package:contacts_service/contacts_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,11 +46,26 @@ class HomePage extends StatelessWidget {
             CameraScreen(),
             ChatScreen(),
             EstadoScreen(),
-            Icon(Icons.call),
+            CallScreen(),
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+            if (await Permission.contacts.request().isGranted) {
+              // Either the permission was already granted before or the user just granted it.
+              //await ContactsService.openContactForm();
+              List<Contact> contacts = await ContactsService.getContacts();
+              Navigator.pushNamed(context, '/list_contacts',
+                  arguments: contacts);
+            } else {
+              // You can request multiple permissions at once.
+              Map<Permission, PermissionStatus> statuses = await [
+                Permission.location,
+                Permission.storage,
+              ].request();
+              print(statuses[Permission.location]);
+            }
+          },
           child: const Icon(Icons.message),
         ),
       ),

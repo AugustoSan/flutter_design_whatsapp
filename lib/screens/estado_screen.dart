@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_whatsapp/utils/utils.dart';
 
-import 'package:flutter_design_whatsapp/widgets/item_widget.dart';
+import 'package:flutter_design_whatsapp/widgets/widgets.dart';
 
 class EstadoScreen extends StatelessWidget {
   const EstadoScreen({Key? key}) : super(key: key);
@@ -10,8 +11,33 @@ class EstadoScreen extends StatelessWidget {
     return ListView(
       children: [
         ItemWiget(
-          title: 'Mi estado',
-          subtitle: 'Añade una actualización',
+          image: Stack(
+            children: [
+              const FadeInImage(
+                placeholder: AssetImage('assets/no-image.jpg'),
+                image: NetworkImage('https://via.placeholder.com/300x300'),
+                fit: BoxFit.cover,
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: CircleAvatar(
+                  radius: 15,
+                  backgroundColor: Colors.green,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.add,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          title: TitleItemWidget(title: 'Mi estado'),
+          subtitle: SubtitleItemWidget(subtitle: 'Añade una actualización'),
           onPress: () {},
         ),
         const ListTile(
@@ -21,14 +47,37 @@ class EstadoScreen extends StatelessWidget {
           ),
         ),
         ItemWiget(
-          title: 'Sin titulo',
-          subtitle: DateTime.now().toString(),
+          image: const FadeInImage(
+            placeholder: AssetImage('assets/no-image.jpg'),
+            image: NetworkImage('https://via.placeholder.com/300x300'),
+            fit: BoxFit.cover,
+          ),
+          title: TitleItemWidget(title: 'Sin titulo'),
+          subtitle: SubtitleItemWidget(
+            subtitle: DateUtil.dateToString(
+              DateUtil.returnToDate(
+                DateTime.now(),
+                const Duration(minutes: -1),
+              ),
+            ),
+          ),
           onPress: () => Navigator.pushNamed(context, 'chat_page'),
-          notification: 1,
         ),
         ItemWiget(
-          title: 'Sin titulo',
-          subtitle: DateTime.now().toIso8601String(),
+          image: const FadeInImage(
+            placeholder: AssetImage('assets/no-image.jpg'),
+            image: NetworkImage('https://via.placeholder.com/300x300'),
+            fit: BoxFit.cover,
+          ),
+          title: TitleItemWidget(title: 'Sin titulo'),
+          subtitle: SubtitleItemWidget(
+            subtitle: DateUtil.dateToString(
+              DateUtil.returnToDate(
+                DateTime.now(),
+                const Duration(hours: -1),
+              ),
+            ),
+          ),
           onPress: () {},
         ),
         const ListTile(
@@ -36,6 +85,23 @@ class EstadoScreen extends StatelessWidget {
             'Vistos',
             style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
+        ),
+        ItemWiget(
+          image: const FadeInImage(
+            placeholder: AssetImage('assets/no-image.jpg'),
+            image: NetworkImage('https://via.placeholder.com/300x300'),
+            fit: BoxFit.cover,
+          ),
+          title: TitleItemWidget(title: 'Sin titulo'),
+          subtitle: SubtitleItemWidget(
+            subtitle: DateUtil.dateToString(
+              DateUtil.returnToDate(
+                DateTime.now(),
+                const Duration(hours: -1),
+              ),
+            ),
+          ),
+          onPress: () {},
         ),
       ],
     );

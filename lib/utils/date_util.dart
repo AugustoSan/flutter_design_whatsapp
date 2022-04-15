@@ -6,9 +6,19 @@ class DateUtil {
     if (timeLast.inSeconds < 60) {
       response = 'ahora';
     } else if (timeLast.inMinutes < 60) {
-      response = timeLast.inMinutes.toString();
+      if (timeLast.inMinutes < 2) {
+        response = 'Hace ' + timeLast.inMinutes.toString() + ' minuto';
+      } else {
+        response = 'Hace ' + timeLast.inMinutes.toString() + ' minutos';
+      }
     } else if (timeLast.inHours < 24) {
-      response = 'Hace ' + timeLast.inHours.toString();
+      if (timeLast.inHours < 2) {
+        response = 'Hace ' + timeLast.inHours.toString() + ' hora';
+      } else {
+        response = 'Hace ' + timeLast.inHours.toString() + ' horas';
+      }
+    } else if (timeLast.inDays < 2) {
+      response = 'Ayer';
     } else {
       response = date.day.toString() +
           "/" +
@@ -17,5 +27,11 @@ class DateUtil {
           date.year.toString();
     }
     return response;
+  }
+
+  static DateTime returnToDate(DateTime date, Duration duration) {
+    DateTime today = DateTime.now();
+    var fiftyDaysFromNow = today.add(duration);
+    return fiftyDaysFromNow;
   }
 }

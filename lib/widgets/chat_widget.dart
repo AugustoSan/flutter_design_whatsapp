@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_design_whatsapp/models/models.dart';
 import 'package:flutter_design_whatsapp/utils/utils.dart';
 import 'package:flutter_design_whatsapp/widgets/widgets.dart';
@@ -11,11 +12,19 @@ class ChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final messages = contac.messages;
     return ItemWiget(
-      title: contac.name,
-      previewTitle: DateUtil.dateToString(messages[messages.length - 1].date),
-      subtitle: messages.isNotEmpty ? messages[0].message : '',
+      image: const FadeInImage(
+        placeholder: AssetImage('assets/no-image.jpg'),
+        image: NetworkImage('https://via.placeholder.com/300x300'),
+        fit: BoxFit.cover,
+      ),
+      title: TitleItemWidget(title: contac.name),
+      subtitle: SubtitleItemWidget(
+          subtitle: messages.isNotEmpty ? messages[0].message : ''),
       onPress: () =>
           Navigator.pushNamed(context, 'chat_page', arguments: contac),
+      leading: Column(
+        children: [Text(DateUtil.dateToString(messages[0].date))],
+      ),
     );
   }
 }

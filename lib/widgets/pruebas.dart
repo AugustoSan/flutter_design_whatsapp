@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class ItemWiget extends StatelessWidget {
+class ItemWigetPruebas extends StatelessWidget {
   Widget image;
   Widget title;
   Widget subtitle;
   Widget? leading;
   Function onPress;
 
-  ItemWiget({
+  ItemWigetPruebas({
     Key? key,
     required this.image,
     required this.title,

@@ -13,6 +13,7 @@ class ListChatsProvider extends ChangeNotifier {
     //final jsonResult = jsonDecode(data);
     final response = Response.fromJson(data);
     DataList.listContacts = response.data;
+    await Future.delayed(const Duration(seconds: 2));
     isLoading = false;
     notifyListeners();
   }
